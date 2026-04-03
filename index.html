@@ -1,27 +1,450 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Asclepio</title>
-  <meta charset="UTF-8">
   <style>
+    :root {
+      --primary: #b07dc9;
+      --text-dark: #2f2437;
+      --bg-light: #faf7fc;
+      --bg-soft: #f3ebf8;
+      --border: #dbc8e8;
+      --white: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1120px, 90%);
+      margin: 0 auto;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(250, 247, 252, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 0.3px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-button {
+      background: var(--primary);
+      color: var(--white);
+      padding: 0.7rem 1.1rem;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .nav-button:hover {
+      transform: translateY(-1px);
+      opacity: 0.95;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 6rem 0 5rem;
+      background:
+        radial-gradient(circle at top right, rgba(176, 125, 201, 0.18), transparent 28%),
+        radial-gradient(circle at left center, rgba(176, 125, 201, 0.10), transparent 25%),
+        var(--bg-light);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-text .eyebrow {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.4rem 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--white);
+      color: var(--primary);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 4.4rem);
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+      letter-spacing: -1px;
+    }
+
+    .hero p {
+      font-size: 1.08rem;
+      max-width: 700px;
+      color: rgba(47, 36, 55, 0.88);
+      margin-bottom: 2rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--primary);
+      color: var(--white);
+      padding: 0.95rem 1.4rem;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 10px 25px rgba(176, 125, 201, 0.22);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .hero-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: 0 20px 45px rgba(47, 36, 55, 0.06);
+    }
+
+    .hero-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .hero-card ul {
+      list-style: none;
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .hero-card li {
+      padding: 0.85rem 1rem;
+      border-radius: 16px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      font-size: 0.96rem;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 5rem 0;
+    }
+
+    .section-header {
+      max-width: 760px;
+      margin-bottom: 2.2rem;
+    }
+
+    .section-label {
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.9rem, 3vw, 2.8rem);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .section-header p {
+      color: rgba(47, 36, 55, 0.86);
+      font-size: 1.02rem;
+    }
+
+    /* PROBLEM */
+    .problem {
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.4rem;
+    }
+
+    .card {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 1.6rem;
+      box-shadow: 0 10px 24px rgba(47, 36, 55, 0.04);
+    }
+
+    .card-number {
+      width: 38px;
+      height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(176, 125, 201, 0.15);
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .card p {
+      font-size: 1rem;
+      color: rgba(47, 36, 55, 0.92);
+    }
+
+    /* VISION */
+    .vision {
+      background: var(--bg-soft);
+    }
+
+    .vision-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .vision-text-box {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: 0 12px 30px rgba(47, 36, 55, 0.05);
+    }
+
+    .vision-text-box p {
+      font-size: 1.04rem;
+      color: rgba(47, 36, 55, 0.92);
+    }
+
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.9rem;
+    }
+
+    .principle {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1rem 1rem;
+      font-weight: 600;
+      color: var(--text-dark);
       text-align: center;
-      margin-top: 100px;
-      background-color: #b07dc9;
+      box-shadow: 0 8px 18px rgba(47, 36, 55, 0.04);
     }
-    h1 {
-      font-size: 48px;
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero-grid,
+      .vision-grid,
+      .cards,
+      .principles {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 4.5rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+      }
     }
-    p {
-      font-size: 20px;
-      color: #555;
+
+    @media (max-width: 640px) {
+      .nav-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero h1 {
+        font-size: 2.3rem;
+      }
+
+      .hero p,
+      .section-header p,
+      .vision-text-box p,
+      .card p {
+        font-size: 0.98rem;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Asclepio</h1>
-  <p>The future of medicine is personalized. Education should be too.</p>
-  <p><i>Coming soon</i></p>
+
+  <header class="navbar">
+    <div class="container nav-content">
+      <a href="#" class="logo">Asclepio</a>
+      <nav class="nav-links">
+        <a href="#problem">Problem</a>
+        <a href="#vision">Vision</a>
+        <a href="#" class="nav-button">Join the waitlist</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <div class="eyebrow">Medical education, reimagined</div>
+          <h1>The future of medicine is personalized. Medical education should be too.</h1>
+          <p>
+            Asclepio is building a new generation of medical learning tools designed to strengthen clinical reasoning,
+            provide continuous progress and learning evaluation, and personalize learning and study strategies for
+            students, professors, and universities.
+          </p>
+          <div class="hero-actions">
+            <a href="#" class="btn-primary">Join the waitlist</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <h3>Built around what matters most</h3>
+          <ul>
+            <li>Stronger clinical reasoning</li>
+            <li>More meaningful learning evaluation</li>
+            <li>Personalized guidance at scale</li>
+            <li>Technology that supports human thinking</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEM SECTION -->
+    <section class="problem" id="problem">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">The problem</div>
+          <h2>Medical education remains highly demanding, but its structure is often still one-size-fits-all.</h2>
+          <p>
+            As medicine becomes more complex and every other field moves toward personalization, many educational systems
+            still lack the tools to understand how individual students are learning, progressing, and struggling over time.
+          </p>
+        </div>
+
+        <div class="cards">
+          <div class="card">
+            <div class="card-number">01</div>
+            <p>
+              In a world where everything is becoming more personalized, why is the approach to medical education still
+              one-size-fits-all?
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-number">02</div>
+            <p>
+              When interviewed, many professors and educational staff report two major limitations: the lack of the right
+              tools to measure individual student metrics longitudinally within large cohorts, and the lack of manpower to
+              intervene meaningfully when students are struggling.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISION / SOLUTION SECTION -->
+    <section class="vision" id="vision">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">Our vision</div>
+          <h2>An interactive learning ecosystem designed to guide students more personally, without replacing human teaching.</h2>
+        </div>
+
+        <div class="vision-grid">
+          <div class="vision-text-box">
+            <p>
+              We are designing an interactive learning ecosystem that helps medical schools connect, engage, and guide
+              their students on a personal level to promote the development of clinical reasoning, critical thinking, and
+              empathic communication skills as an adjunct to their curriculum, while adapting to each institution’s current
+              structure, content, objectives, and priorities.
+            </p>
+          </div>
+
+          <div class="principles">
+            <div class="principle">Personalized learning</div>
+            <div class="principle">Active learning</div>
+            <div class="principle">Clinical reasoning</div>
+            <div class="principle">Guided decision pathways</div>
+            <div class="principle">Student-faculty collaboration</div>
+            <div class="principle">Meaningful analytics</div>
+            <div class="principle">Technology that supports thinking</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
 </body>
 </html>
