@@ -829,9 +829,11 @@
     </div>
   </div>
 
- <script>
+  <script>
   const modal = document.getElementById("waitlistModal");
   const waitlistForm = document.getElementById("waitlistForm");
+
+  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxgGr1pA4Dol2fMlKSg-T4daL3hwaiJ4GhMINmXA7K5yPYQbUj6SIDYEEGx6NuKLVgJ/exec";
 
   function openModal() {
     modal.classList.add("active");
@@ -846,9 +848,7 @@
   }
 
   modal.addEventListener("click", function (e) {
-    if (e.target === modal) {
-      closeModal();
-    }
+    if (e.target === modal) closeModal();
   });
 
   document.addEventListener("keydown", function (e) {
@@ -866,26 +866,31 @@
     if (!name || !email) return;
 
     try {
-      const response = await fetch("https://script.google.com/macros/s/AKfycbxgGr1pA4Dol2fMlKSg-T4daL3hwaiJ4GhMINmXA7K5yPYQbUj6SIDYEEGx6NuKLVgJ/exec", {
+      const response = await fetch(WEB_APP_URL, {
         method: "POST",
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8"
-        },
         body: JSON.stringify({ name, email })
       });
 
-      const result = await response.json();
+      const text = await response.text();
+      console.log("Raw response:", text);
+
+      let result;
+      try {
+        result = JSON.parse(text);
+      } catch {
+        throw new Error("Response was not valid JSON: " + text);
+      }
 
       if (result.result === "success") {
         alert("Thanks! You have been added to the waitlist.");
         waitlistForm.reset();
         closeModal();
       } else {
-        alert("Something went wrong: " + result.message);
+        throw new Error(result.message || "Unknown Apps Script error");
       }
     } catch (error) {
-      alert("Submission failed. Please try again.");
-      console.error(error);
+      console.error("Submission error:", error);
+      alert("Submission failed. Open the browser console to see the error.");
     }
   });
 </script>
