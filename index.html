@@ -64,6 +64,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 1rem 0;
+      gap: 1rem;
     }
 
     .logo {
@@ -71,13 +72,15 @@
       font-weight: 700;
       color: var(--primary);
       letter-spacing: 0.3px;
+      flex-shrink: 0;
     }
 
     .nav-links {
       display: flex;
-      gap: 1.4rem;
+      gap: 1.2rem;
       align-items: center;
       flex-wrap: wrap;
+      justify-content: flex-end;
     }
 
     .nav-links a {
@@ -88,6 +91,36 @@
 
     .nav-links a:hover {
       color: var(--primary);
+    }
+
+    .language-switcher {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-left: 0.2rem;
+    }
+
+    .lang-button {
+      background: var(--white);
+      border: 1px solid var(--border);
+      color: var(--text-dark);
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.82rem;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+    .lang-button:hover {
+      background: var(--bg-soft);
+      transform: translateY(-1px);
+    }
+
+    .lang-button.active {
+      background: var(--primary);
+      color: var(--white);
+      border-color: var(--primary);
     }
 
     .nav-button {
@@ -393,14 +426,9 @@
       margin-top: 1.5rem;
     }
 
-    .contact-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
     .contact-link {
+      display: inline-block;
+      margin-top: 1rem;
       padding: 0.85rem 1rem;
       border-radius: 16px;
       border: 1px solid var(--border);
@@ -491,12 +519,6 @@
       box-shadow: 0 0 0 4px rgba(176, 125, 201, 0.12);
     }
 
-    .form-note {
-      margin-top: 0.9rem;
-      font-size: 0.88rem;
-      color: var(--muted);
-    }
-
     /* RESPONSIVE */
     @media (max-width: 960px) {
       .hero-grid,
@@ -541,13 +563,26 @@
     <div class="container nav-content">
       <a href="#" class="logo">Asclepio</a>
       <nav class="nav-links">
-        <a href="#problem">Problem</a>
-        <a href="#vision">Vision</a>
-        <a href="#why-now">Why now</a>
-        <a href="#for-whom">Who it's for</a>
-        <a href="#team">Team</a>
-        <a href="#contact">Contact</a>
-        <button class="nav-button" onclick="openModal()">Join the waitlist</button>
+        <a href="#problem" data-en="Problem" data-es="Problema">Problem</a>
+        <a href="#vision" data-en="Vision" data-es="Visión">Vision</a>
+        <a href="#why-now" data-en="Why now" data-es="Por qué ahora">Why now</a>
+        <a href="#for-whom" data-en="Who it's for" data-es="Para quién es">Who it's for</a>
+        <a href="#team" data-en="Team" data-es="Equipo">Team</a>
+        <a href="#contact" data-en="Contact" data-es="Contacto">Contact</a>
+
+        <div class="language-switcher">
+          <button class="lang-button" id="lang-en" onclick="setLanguage('en')">EN</button>
+          <button class="lang-button" id="lang-es" onclick="setLanguage('es')">ES</button>
+        </div>
+
+        <button
+          class="nav-button"
+          onclick="openModal()"
+          data-en="Join the waitlist"
+          data-es="Únete a la lista de espera"
+        >
+          Join the waitlist
+        </button>
       </nav>
     </div>
   </header>
@@ -557,26 +592,63 @@
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-text">
-          <div class="eyebrow">Medical education, reimagined</div>
-          <h1>The future of medicine is personalized. Medical education should be too.</h1>
-          <p>
+          <div
+            class="eyebrow"
+            data-en="Medical education, reimagined"
+            data-es="La educación médica, reinventada"
+          >
+            Medical education, reimagined
+          </div>
+
+          <h1
+            data-en="The future of medicine is personalized. Medical education should be too."
+            data-es="El futuro de la medicina es personalizado. La educación médica también debería serlo."
+          >
+            The future of medicine is personalized. Medical education should be too.
+          </h1>
+
+          <p
+            data-en="Asclepio is building a new generation of medical learning tools designed to strengthen clinical reasoning, provide continuous progress and learning evaluation, and personalize learning and study strategies for students, professors, and universities."
+            data-es="Asclepio está desarrollando una nueva generación de herramientas de aprendizaje médico diseñadas para fortalecer el razonamiento clínico, proporcionar una evaluación continua del progreso y del aprendizaje, y personalizar las estrategias de estudio para estudiantes, profesores y universidades."
+          >
             Asclepio is building a new generation of medical learning tools designed to strengthen clinical reasoning,
             provide continuous progress and learning evaluation, and personalize learning and study strategies for
             students, professors, and universities.
           </p>
+
           <div class="hero-actions">
-            <button class="btn-primary" onclick="openModal()">Join the waitlist</button>
-            <a href="#vision" class="btn-secondary">Learn more</a>
+            <button
+              class="btn-primary"
+              onclick="openModal()"
+              data-en="Join the waitlist"
+              data-es="Únete a la lista de espera"
+            >
+              Join the waitlist
+            </button>
+
+            <a
+              href="#vision"
+              class="btn-secondary"
+              data-en="Learn more"
+              data-es="Saber más"
+            >
+              Learn more
+            </a>
           </div>
         </div>
 
         <div class="hero-card">
-          <h3>Built around what matters most</h3>
+          <h3
+            data-en="Built around what matters most"
+            data-es="Diseñado en torno a lo que más importa"
+          >
+            Built around what matters most
+          </h3>
           <ul>
-            <li>Stronger clinical reasoning</li>
-            <li>More meaningful learning evaluation</li>
-            <li>Personalized guidance at scale</li>
-            <li>Technology that supports human thinking</li>
+            <li data-en="Stronger clinical reasoning" data-es="Mayor razonamiento clínico">Stronger clinical reasoning</li>
+            <li data-en="More meaningful learning evaluation" data-es="Evaluación del aprendizaje más significativa">More meaningful learning evaluation</li>
+            <li data-en="Personalized guidance at scale" data-es="Orientación personalizada a gran escala">Personalized guidance at scale</li>
+            <li data-en="Technology that supports human thinking" data-es="Tecnología que apoya el pensamiento humano">Technology that supports human thinking</li>
           </ul>
         </div>
       </div>
@@ -586,9 +658,17 @@
     <section class="problem" id="problem">
       <div class="container">
         <div class="section-header">
-          <div class="section-label">The problem</div>
-          <h2>Medical education remains highly demanding, but its structure is often still one-size-fits-all.</h2>
-          <p>
+          <div class="section-label" data-en="The problem" data-es="El problema">The problem</div>
+          <h2
+            data-en="Medical education remains highly demanding, but its structure is often still one-size-fits-all."
+            data-es="La educación médica sigue siendo altamente exigente, pero su estructura a menudo sigue siendo uniforme para todos."
+          >
+            Medical education remains highly demanding, but its structure is often still one-size-fits-all.
+          </h2>
+          <p
+            data-en="As medicine becomes more complex and every other field moves toward personalization, many educational systems still lack the tools to understand how individual students are learning, progressing, and struggling over time."
+            data-es="A medida que la medicina se vuelve más compleja y otros ámbitos avanzan hacia la personalización, muchos sistemas educativos aún carecen de herramientas para comprender cómo aprende, progresa y encuentra dificultades cada estudiante a lo largo del tiempo."
+          >
             As medicine becomes more complex and every other field moves toward personalization, many educational systems
             still lack the tools to understand how individual students are learning, progressing, and struggling over time.
           </p>
@@ -597,7 +677,10 @@
         <div class="cards">
           <div class="card">
             <div class="card-number">01</div>
-            <p>
+            <p
+              data-en="In a world where everything is becoming more personalized, why is the approach to medical education still one-size-fits-all?"
+              data-es="En un mundo donde todo es cada vez más personalizado, ¿por qué el enfoque de la educación médica sigue siendo igual para todos?"
+            >
               In a world where everything is becoming more personalized, why is the approach to medical education still
               one-size-fits-all?
             </p>
@@ -605,7 +688,10 @@
 
           <div class="card">
             <div class="card-number">02</div>
-            <p>
+            <p
+              data-en="When interviewed, many professors and educational staff report two major limitations: the lack of the right tools to measure individual student metrics longitudinally within large cohorts, and the lack of manpower to intervene meaningfully when students are struggling."
+              data-es="Cuando se entrevista a profesores y personal educativo, muchos señalan dos limitaciones principales: la falta de herramientas adecuadas para medir métricas individuales de los estudiantes de forma longitudinal en cohortes grandes y la falta de personal para intervenir de manera significativa cuando los estudiantes tienen dificultades."
+            >
               When interviewed, many professors and educational staff report two major limitations: the lack of the right
               tools to measure individual student metrics longitudinally within large cohorts, and the lack of manpower to
               intervene meaningfully when students are struggling.
@@ -619,13 +705,21 @@
     <section class="vision" id="vision">
       <div class="container">
         <div class="section-header">
-          <div class="section-label">Our vision</div>
-          <h2>An interactive learning ecosystem designed to guide students more personally, without replacing human teaching.</h2>
+          <div class="section-label" data-en="Our vision" data-es="Nuestra visión">Our vision</div>
+          <h2
+            data-en="An interactive learning ecosystem designed to guide students more personally, without replacing human teaching."
+            data-es="Un ecosistema de aprendizaje interactivo diseñado para guiar a los estudiantes de forma más personal, sin reemplazar la enseñanza humana."
+          >
+            An interactive learning ecosystem designed to guide students more personally, without replacing human teaching.
+          </h2>
         </div>
 
         <div class="vision-grid">
           <div class="vision-text-box">
-            <p>
+            <p
+              data-en="We are designing an interactive learning ecosystem that helps medical schools connect, engage, and guide their students on a personal level to promote the development of clinical reasoning, critical thinking, and empathic communication skills as an adjunct to their curriculum, while adapting to each institution’s current structure, content, objectives, and priorities."
+              data-es="Estamos diseñando un ecosistema de aprendizaje interactivo que ayuda a las facultades de medicina a conectar, implicar y guiar a sus estudiantes de manera más personal para promover el desarrollo del razonamiento clínico, el pensamiento crítico y las habilidades de comunicación empática como complemento a su currículo, adaptándose a la estructura, el contenido, los objetivos y las prioridades de cada institución."
+            >
               We are designing an interactive learning ecosystem that helps medical schools connect, engage, and guide
               their students on a personal level to promote the development of clinical reasoning, critical thinking, and
               empathic communication skills as an adjunct to their curriculum, while adapting to each institution’s current
@@ -634,14 +728,14 @@
           </div>
 
           <div class="principles">
-            <div class="principle">Personalized learning</div>
-            <div class="principle">Active learning</div>
-            <div class="principle">Clinical reasoning</div>
-            <div class="principle">Guided decision pathways</div>
-            <div class="principle">Student-faculty collaboration</div>
-            <div class="principle">Meaningful analytics</div>
-            <div class="principle">Technology that supports thinking</div>
-            <div class="principle">Human-centered education</div>
+            <div class="principle" data-en="Personalized learning" data-es="Aprendizaje personalizado">Personalized learning</div>
+            <div class="principle" data-en="Active learning" data-es="Aprendizaje activo">Active learning</div>
+            <div class="principle" data-en="Clinical reasoning" data-es="Razonamiento clínico">Clinical reasoning</div>
+            <div class="principle" data-en="Guided decision pathways" data-es="Itinerarios guiados de decisión">Guided decision pathways</div>
+            <div class="principle" data-en="Student-faculty collaboration" data-es="Colaboración entre estudiantes y profesorado">Student-faculty collaboration</div>
+            <div class="principle" data-en="Meaningful analytics" data-es="Analítica significativa">Meaningful analytics</div>
+            <div class="principle" data-en="Technology that supports thinking" data-es="Tecnología que apoya el pensamiento">Technology that supports thinking</div>
+            <div class="principle" data-en="Human-centered education" data-es="Educación centrada en las personas">Human-centered education</div>
           </div>
         </div>
       </div>
@@ -651,9 +745,17 @@
     <section class="why-now" id="why-now">
       <div class="container">
         <div class="section-header">
-          <div class="section-label">Why now</div>
-          <h2>For the first time, we have the technological tools to make personalization in medical education genuinely possible.</h2>
-          <p>
+          <div class="section-label" data-en="Why now" data-es="Por qué ahora">Why now</div>
+          <h2
+            data-en="For the first time, we have the technological tools to make personalization in medical education genuinely possible."
+            data-es="Por primera vez, contamos con las herramientas tecnológicas para hacer realmente posible la personalización en la educación médica."
+          >
+            For the first time, we have the technological tools to make personalization in medical education genuinely possible.
+          </h2>
+          <p
+            data-en="AI is changing education, but the opportunity is bigger than automation. It is the opportunity to help students learn more actively, think more clearly, and receive support that is better adapted to their individual progress."
+            data-es="La IA está cambiando la educación, pero la oportunidad va más allá de la automatización. Es la oportunidad de ayudar a los estudiantes a aprender de forma más activa, pensar con mayor claridad y recibir un apoyo mejor adaptado a su progreso individual."
+          >
             AI is changing education, but the opportunity is bigger than automation. It is the opportunity to help students
             learn more actively, think more clearly, and receive support that is better adapted to their individual progress.
           </p>
@@ -661,24 +763,33 @@
 
         <div class="cards-3">
           <div class="card card-white">
-            <h3>Personalization is finally feasible</h3>
-            <p>
+            <h3 data-en="Personalization is finally feasible" data-es="La personalización por fin es viable">Personalization is finally feasible</h3>
+            <p
+              data-en="New technologies make it possible to move beyond static, uniform teaching models and begin tailoring educational support to different learners at scale."
+              data-es="Las nuevas tecnologías permiten ir más allá de modelos de enseñanza estáticos y uniformes y empezar a adaptar el apoyo educativo a distintos estudiantes a gran escala."
+            >
               New technologies make it possible to move beyond static, uniform teaching models and begin tailoring educational
               support to different learners at scale.
             </p>
           </div>
 
           <div class="card card-white">
-            <h3>Students need more than memorization</h3>
-            <p>
+            <h3 data-en="Students need more than memorization" data-es="Los estudiantes necesitan más que memorización">Students need more than memorization</h3>
+            <p
+              data-en="Future physicians need tools that help them build judgment, reasoning, and decision-making, not only recall facts for short-term performance."
+              data-es="Los futuros médicos necesitan herramientas que les ayuden a desarrollar criterio, razonamiento y toma de decisiones, no solo a recordar datos para un rendimiento a corto plazo."
+            >
               Future physicians need tools that help them build judgment, reasoning, and decision-making, not only recall facts
               for short-term performance.
             </p>
           </div>
 
           <div class="card card-white">
-            <h3>Faculties need better insight</h3>
-            <p>
+            <h3 data-en="Faculties need better insight" data-es="Las facultades necesitan una mejor visión">Faculties need better insight</h3>
+            <p
+              data-en="Medical schools need more effective ways to engage learners, understand longitudinal progress, and evaluate the development of reasoning in meaningful ways."
+              data-es="Las facultades de medicina necesitan formas más eficaces de implicar a los estudiantes, comprender su progreso longitudinal y evaluar el desarrollo del razonamiento de manera significativa."
+            >
               Medical schools need more effective ways to engage learners, understand longitudinal progress, and evaluate the
               development of reasoning in meaningful ways.
             </p>
@@ -691,9 +802,17 @@
     <section class="audience" id="for-whom">
       <div class="container">
         <div class="section-header">
-          <div class="section-label">Who it is for</div>
-          <h2>Designed for the people shaping the future of medical training.</h2>
-          <p>
+          <div class="section-label" data-en="Who it is for" data-es="Para quién es">Who it is for</div>
+          <h2
+            data-en="Designed for the people shaping the future of medical training."
+            data-es="Diseñado para las personas que están dando forma al futuro de la formación médica."
+          >
+            Designed for the people shaping the future of medical training.
+          </h2>
+          <p
+            data-en="Asclepio is built to create value across the educational ecosystem, from the individual student to the institution guiding broader curricular goals."
+            data-es="Asclepio está diseñado para generar valor en todo el ecosistema educativo, desde el estudiante individual hasta la institución que guía objetivos curriculares más amplios."
+          >
             Asclepio is built to create value across the educational ecosystem, from the individual student to the institution
             guiding broader curricular goals.
           </p>
@@ -701,23 +820,32 @@
 
         <div class="cards-3">
           <div class="card">
-            <h3>Students</h3>
-            <p>
+            <h3 data-en="Students" data-es="Estudiantes">Students</h3>
+            <p
+              data-en="More active, connected, and clinically meaningful learning that helps bridge the gap between classroom knowledge and real medical thinking."
+              data-es="Un aprendizaje más activo, conectado y clínicamente significativo que ayuda a cerrar la brecha entre el conocimiento del aula y el razonamiento médico real."
+            >
               More active, connected, and clinically meaningful learning that helps bridge the gap between classroom knowledge
               and real medical thinking.
             </p>
           </div>
 
           <div class="card">
-            <h3>Faculty</h3>
-            <p>
+            <h3 data-en="Faculty" data-es="Profesorado">Faculty</h3>
+            <p
+              data-en="Better teaching support, stronger engagement, and clearer insight into how learners are progressing over time."
+              data-es="Mejor apoyo docente, mayor implicación y una visión más clara de cómo progresan los estudiantes a lo largo del tiempo."
+            >
               Better teaching support, stronger engagement, and clearer insight into how learners are progressing over time.
             </p>
           </div>
 
           <div class="card">
-            <h3>Institutions</h3>
-            <p>
+            <h3 data-en="Institutions" data-es="Instituciones">Institutions</h3>
+            <p
+              data-en="A more modern approach to medical education aligned with future needs, evolving technologies, and the realities of large student cohorts."
+              data-es="Un enfoque más moderno de la educación médica, alineado con las necesidades futuras, las tecnologías emergentes y la realidad de cohortes grandes de estudiantes."
+            >
               A more modern approach to medical education aligned with future needs, evolving technologies, and the realities of
               large student cohorts.
             </p>
@@ -727,115 +855,264 @@
     </section>
 
     <!-- TEAM -->
-    <section class="team" id="team">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-label">Team</div>
-          <h2>Built by people working from inside medical education.</h2>
-          <p>
-            Asclepio is being developed by a team that understands the pressures, limitations, and opportunities of modern
-            medical training from direct experience.
-          </p>
-        </div>
+<section class="team" id="team">
+  <div class="container">
+    <div class="section-header">
+      <div
+        class="section-label"
+        data-en="Team"
+        data-es="Equipo"
+      >Team</div>
 
-        <div class="cards-3">
-          <div class="card card-white">
-            <span class="team-role">Founder</span>
-            <h3>Amelia Franchin</h3>
-            <p>5th-Year Medical Student at the University of Navarra.</p>
-          </div>
+      <h2
+        data-en="Built by people working from inside medical education."
+        data-es="Construido por personas que trabajan desde dentro de la educación médica."
+      >
+        Built by people working from inside medical education.
+      </h2>
 
-          <div class="card card-white">
-            <span class="team-role">Student Collaborator</span>
-            <h3>Cristina Casado</h3>
-            <p>5th-Year Medical Student at the University of Navarra.</p>
-          </div>
+      <p
+        data-en="Asclepio is being developed by a team that understands the pressures, limitations, and opportunities of modern medical training from direct experience."
+        data-es="Asclepio está siendo desarrollado por un equipo que comprende de primera mano las presiones, limitaciones y oportunidades de la formación médica actual."
+      >
+        Asclepio is being developed by a team that understands the pressures, limitations, and opportunities of modern medical training from direct experience.
+      </p>
+    </div>
 
-          <div class="card card-white">
-            <span class="team-role">Technical Collaborator</span>
-            <h3>Christian Diaz</h3>
-            <p>Programmer supporting the development and implementation of the platform.</p>
-          </div>
-
-          <div class="card card-white">
-            <span class="team-role">Student Collaborator</span>
-            <h3>Federico Capriles</h3>
-            <p>4th-Year Medical Student at the University of Navarra.</p>
-          </div>
-        </div>
+    <div class="cards-3">
+      <div class="card card-white">
+        <span
+          class="team-role"
+          data-en="Founder"
+          data-es="Fundadora"
+        >Founder</span>
+        <h3>Amelia Franchin</h3>
+        <p
+          data-en="5th-Year Medical Student at the University of Navarra."
+          data-es="Estudiante de 5º de Medicina en la Universidad de Navarra."
+        >
+          5th-Year Medical Student at the University of Navarra.
+        </p>
       </div>
-    </section>
 
-    <!-- CTA / CONTACT -->
-    <section class="cta" id="contact">
-      <div class="container">
-        <div class="cta-box">
-          <div class="section-header" style="margin-bottom: 0.5rem;">
-            <div class="section-label">Get in touch</div>
-            <h2>Join the early community around Asclepio.</h2>
-            <p>
-              We are currently building, refining, and preparing for early collaboration. We would love to hear from students,
-              educators, institutions, and potential collaborators.
-            </p>
-          </div>
-
-          <div class="cta-actions">
-            <button class="btn-primary" onclick="openModal()">Join the waitlist</button>
-            <a class="btn-secondary" href="mailto:amelia.franchin@gmail.com">Contact us</a>
-          </div>
-
-          
-            <div class="contact-link">
-              Partner with us! We are currently looking for a graphic designer with experience in video games.
-            </div>
-      
-        </div>
+      <div class="card card-white">
+        <span
+          class="team-role"
+          data-en="Student Collaborator"
+          data-es="Colaboradora Estudiantil"
+        >Student Collaborator</span>
+        <h3>Cristina Casado</h3>
+        <p
+          data-en="5th-Year Medical Student at the University of Navarra."
+          data-es="Estudiante de 5º de Medicina en la Universidad de Navarra."
+        >
+          5th-Year Medical Student at the University of Navarra.
+        </p>
       </div>
-    </section>
-  </main>
 
+      <div class="card card-white">
+        <span
+          class="team-role"
+          data-en="Technical Collaborator"
+          data-es="Colaborador Técnico"
+        >Technical Collaborator</span>
+        <h3>Christian Diaz</h3>
+        <p
+          data-en="Programmer supporting the development and implementation of the platform."
+          data-es="Programador que apoya el desarrollo y la implementación de la plataforma."
+        >
+          Programmer supporting the development and implementation of the platform.
+        </p>
+      </div>
 
-  <!-- WAITLIST MODAL -->
-  <div class="modal-overlay" id="waitlistModal" aria-hidden="true">
-    <div class="modal">
-      <button class="close-modal" onclick="closeModal()" aria-label="Close">×</button>
-      <h3>Join the waitlist</h3>
-      <p>Leave your name and email to hear about updates, early access, and pilot opportunities.</p>
-
-      <!--
-        TO MAKE THIS SAVE SOMEWHERE:
-        Replace the form action below with your backend / form endpoint.
-
-        EASY OPTIONS:
-        1. Formspree
-        2. Getform
-        3. Google Apps Script -> Google Sheets
-        4. Firebase / Supabase backend
-
-        Right now, the form is prevented in JavaScript and shows a success alert only.
-      -->
-      <form id="waitlistForm">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" placeholder="Your name" required />
-        </div>
-
-        <div class="form-group">
-          <label for="email">Email address</label>
-          <input type="email" id="email" name="email" placeholder="you@example.com" required />
-        </div>
-
-        <button type="submit" class="btn-primary" style="width: 100%;">Join the waitlist</button>
-        
-      </form>
+      <div class="card card-white">
+        <span
+          class="team-role"
+          data-en="Student Collaborator"
+          data-es="Colaborador Estudiantil"
+        >Student Collaborator</span>
+        <h3>Federico Capriles</h3>
+        <p
+          data-en="4th-Year Medical Student at the University of Navarra."
+          data-es="Estudiante de 4º de Medicina en la Universidad de Navarra."
+        >
+          4th-Year Medical Student at the University of Navarra.
+        </p>
+      </div>
     </div>
   </div>
+</section>
 
-  <script>
+<!-- CTA / CONTACT -->
+<section class="cta" id="contact">
+  <div class="container">
+    <div class="cta-box">
+      <div class="section-header" style="margin-bottom: 0.5rem;">
+        <div
+          class="section-label"
+          data-en="Get in touch"
+          data-es="Contacto"
+        >Get in touch</div>
+
+        <h2
+          data-en="Join the early community around Asclepio."
+          data-es="Únete a la comunidad inicial de Asclepio."
+        >
+          Join the early community around Asclepio.
+        </h2>
+
+        <p
+          data-en="We are currently building, refining, and preparing for early collaboration. We would love to hear from students, educators, institutions, and potential collaborators."
+          data-es="Actualmente estamos construyendo, refinando y preparándonos para las primeras colaboraciones. Nos encantaría saber de estudiantes, docentes, instituciones y posibles colaboradores."
+        >
+          We are currently building, refining, and preparing for early collaboration. We would love to hear from students, educators, institutions, and potential collaborators.
+        </p>
+      </div>
+
+      <div class="cta-actions">
+        <button
+          class="btn-primary"
+          onclick="openModal()"
+          data-en="Join the waitlist"
+          data-es="Únete a la lista de espera"
+        >
+          Join the waitlist
+        </button>
+
+        <a
+          class="btn-secondary"
+          href="mailto:amelia.franchin@gmail.com"
+          data-en="Contact us"
+          data-es="Contáctanos"
+        >
+          Contact us
+        </a>
+      </div>
+
+      <div
+        class="contact-link"
+        data-en="Partner with us! We are currently looking for a graphic designer with experience in video games."
+        data-es="¡Colabora con nosotros! Actualmente estamos buscando un diseñador gráfico con experiencia en videojuegos."
+      >
+        Partner with us! We are currently looking for a graphic designer with experience in video games.
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- WAITLIST MODAL -->
+<div class="modal-overlay" id="waitlistModal" aria-hidden="true">
+  <div class="modal">
+    <button class="close-modal" onclick="closeModal()" aria-label="Close">×</button>
+
+    <h3
+      data-en="Join the waitlist"
+      data-es="Únete a la lista de espera"
+    >
+      Join the waitlist
+    </h3>
+
+    <p
+      data-en="Leave your name and email to hear about updates, early access, and pilot opportunities."
+      data-es="Déjanos tu nombre y correo para recibir novedades, acceso anticipado y oportunidades piloto."
+    >
+      Leave your name and email to hear about updates, early access, and pilot opportunities.
+    </p>
+
+    <form id="waitlistForm">
+      <div class="form-group">
+        <label
+          for="name"
+          data-en="Name"
+          data-es="Nombre"
+        >Name</label>
+
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Your name"
+          data-placeholder-en="Your name"
+          data-placeholder-es="Tu nombre"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label
+          for="email"
+          data-en="Email address"
+          data-es="Correo electrónico"
+        >Email address</label>
+
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="you@example.com"
+          data-placeholder-en="you@example.com"
+          data-placeholder-es="tucorreo@ejemplo.com"
+          required
+        />
+      </div>
+
+      <button
+        type="submit"
+        class="btn-primary"
+        style="width: 100%;"
+        data-en="Join the waitlist"
+        data-es="Únete a la lista de espera"
+      >
+        Join the waitlist
+      </button>
+    </form>
+  </div>
+</div>
+
+<script>
   const modal = document.getElementById("waitlistModal");
   const waitlistForm = document.getElementById("waitlistForm");
-
   const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxgGr1pA4Dol2fMlKSg-T4daL3hwaiJ4GhMINmXA7K5yPYQbUj6SIDYEEGx6NuKLVgJ/exec";
+
+  function applyLanguage(lang) {
+    document.documentElement.lang = lang;
+
+    const textElements = document.querySelectorAll("[data-en][data-es]");
+    textElements.forEach((el) => {
+      el.textContent = el.getAttribute(`data-${lang}`);
+    });
+
+    const placeholderElements = document.querySelectorAll("[data-placeholder-en][data-placeholder-es]");
+    placeholderElements.forEach((el) => {
+      el.placeholder = el.getAttribute(`data-placeholder-${lang}`);
+    });
+
+    localStorage.setItem("language", lang);
+  }
+
+  function setLanguage(lang) {
+    applyLanguage(lang);
+  }
+
+  function detectLanguage() {
+    const savedLanguage = localStorage.getItem("language");
+    if (savedLanguage) {
+      applyLanguage(savedLanguage);
+      return;
+    }
+
+    const browserLanguage = navigator.language || navigator.userLanguage;
+    if (browserLanguage.toLowerCase().startsWith("es")) {
+      applyLanguage("es");
+    } else {
+      applyLanguage("en");
+    }
+  }
+
+  function getCurrentLanguage() {
+    return localStorage.getItem("language") || (navigator.language && navigator.language.toLowerCase().startsWith("es") ? "es" : "en");
+  }
 
   function openModal() {
     modal.classList.add("active");
@@ -859,11 +1136,14 @@
     }
   });
 
+  document.addEventListener("DOMContentLoaded", detectLanguage);
+
   waitlistForm.addEventListener("submit", async function (e) {
     e.preventDefault();
 
     const name = document.getElementById("name").value.trim();
     const email = document.getElementById("email").value.trim();
+    const lang = getCurrentLanguage();
 
     if (!name || !email) return;
 
@@ -884,7 +1164,11 @@
       }
 
       if (result.result === "success") {
-        alert("Thanks! You have been added to the waitlist.");
+        alert(
+          lang === "es"
+            ? "¡Gracias! Has sido añadido a la lista de espera."
+            : "Thanks! You have been added to the waitlist."
+        );
         waitlistForm.reset();
         closeModal();
       } else {
@@ -892,7 +1176,11 @@
       }
     } catch (error) {
       console.error("Submission error:", error);
-      alert("Submission failed. Open the browser console to see the error.");
+      alert(
+        lang === "es"
+          ? "El envío ha fallado. Abre la consola del navegador para ver el error."
+          : "Submission failed. Open the browser console to see the error."
+      );
     }
   });
 </script>
